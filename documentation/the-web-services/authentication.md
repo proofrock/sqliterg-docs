@@ -115,7 +115,7 @@ When a database is protected with authentication in [`INLINE` mode](authenticati
 ```
 {% endcode %}
 
-If the token verification fails, the response will be returned after 1 second, to prevent brute forcing. The wait time is per database: different failed requests for the same database will "stack", while different databases will work concurrently.
+If the token verification fails, the response will be returned after 1 second, to prevent brute forcing.
 
 ## Token-based auth for macros and backup
 
@@ -162,4 +162,4 @@ http://<host>:<port>/<db_name>/macro/<macro_id>?token=ciao
 
 The token is always plaintext, even if the token specified server-side is hashed.
 
-If the token verification fails, the response will be returned after 1 second, to prevent brute forcing. The wait time is per database: different failed requests for the same database will "stack", while different databases will work concurrently.
+If the token verification fails, the response will be returned after 1 second, to prevent brute forcing.

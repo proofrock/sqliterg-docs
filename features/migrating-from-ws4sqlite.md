@@ -25,3 +25,4 @@ Here is a list of changes that need to be done or be aware of when migrating fro
 
 * Read-only mode is performed via the `query_only` PRAGMA;
 * Even if the database is read only, it's still possible to perform [onCreate](../documentation/macros.md#greater-than-oncreate)/[onStartup](../documentation/macros.md#greater-than-onstartup) macros;
+* When an auth error occurs, both `ws4sqlite` and `sqliterg` block the request for 1 second. The difference is that `ws4sqlite` blocks also all the other requests on the same database, while `sqliterg` does not. `ws4sqlite`'s behavior is more prone to DDOS attacks.

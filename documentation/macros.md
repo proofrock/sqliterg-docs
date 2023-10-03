@@ -39,7 +39,7 @@ When executing certain statements (most notable, `VACUUM`), SQLite requires not 
 
 #### `statements`
 
-_Lines 4-6, list of strings_
+_Lines 4-6, list of strings, mandatory_
 
 The list of statements to execute, in order. `^` syntax can be used to refer to [Stored Statements](configuration-file/stored-statements.md).
 
@@ -103,3 +103,14 @@ http://<host>:<port>/<db_name>/macro/<macro_id>
 {% endcode %}
 
 The endpoint can be authenticated with a token-based setup. See the [relevant documentation](the-web-services/authentication.md#token-based-auth-for-macros-and-backup) for more info.
+
+{% hint style="info" %}
+If you don't specify any authentication, be aware that the `webService` node may be empty. To be accepted by the YAML parser it's necessary to specify an empty object:
+
+{% code lineNumbers="true" %}
+```yaml
+    [...]
+    webService: {}
+```
+{% endcode %}
+{% endhint %}

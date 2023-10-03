@@ -113,3 +113,14 @@ http://<host>:<port>/<db_name>/backup
 {% endcode %}
 
 The endpoint can be authenticated with a token-based setup. See the [relevant documentation](the-web-services/authentication.md#token-based-auth-for-macros-and-backup) for more info.
+
+{% hint style="info" %}
+If you don't specify any authentication, be aware that the `webService` node may be empty. To be accepted by the YAML parser it's necessary to specify an empty object:
+
+{% code lineNumbers="true" %}
+```yaml
+    [...]
+    webService: {}
+```
+{% endcode %}
+{% endhint %}

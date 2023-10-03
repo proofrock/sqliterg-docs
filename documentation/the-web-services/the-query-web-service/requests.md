@@ -51,7 +51,7 @@ This is a JSON that exemplifies all possible elements of a request.
 
 Let's go through it.
 
-#### Authentication Credentials
+#### `credentials`: Authentication Credentials
 
 _Lines 2-5; object_
 
@@ -59,13 +59,15 @@ If [authentication](../authentication.md) is enabled _in `INLINE` mode_, this ob
 
 See the [detailed docs](../authentication.md#credentials-in-the-request-inline-mode).
 
-#### List of Queries/Statements
+#### `transaction`: List of Queries/Statements
 
 _Lines 6-29; list of objects; mandatory_
 
 The list of the queries or statements that will actually be performed on the database, with their own parameters.
 
 They will be run in a transaction, and the transaction will be committed only if all the queries that are _not_ marked as `noFail` (see the [relevant section](errors.md)) do successfully complete.
+
+The transaction can be empty, in that case the database will be [locked and unlocked](../../../advanced-topics.md#concurrency-or-lack-thereof) but nothing else will be done.
 
 #### SQL Statements to Execute
 
