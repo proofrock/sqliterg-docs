@@ -4,7 +4,7 @@ description: Query sqlite via http - and remote clients too!
 
 # 🌿 Introduction & Credits
 
-_This is a rewrite in Rust of_ [_ws4sqlite_](https://github.com/proofrock/ws4sqlite)_, 30-50% faster, 10x less memory used, more flexible in respect to sqlite support. It is not a direct rewrite, more like a "sane" (I hope) redesign. You can read more about what's changed_ [_here_](https://github.com/proofrock/sqliterg/blob/main/CHANGES\_FROM\_WS4SQLITE.md)_._
+> _This is a rewrite in Rust of_ [_ws4sqlite_](https://github.com/proofrock/ws4sqlite)_,_ [_30-50% faster_](features/performances.md)_, 10x less memory used,_ [_more flexible_](building-and-testing.md#types-of-binaries) _in respect to sqlite support. It is not a direct rewrite, more like a "sane" (I hope) redesign. You can read more about what's changed and how to migrate_ [_here_](features/migrating-from-ws4sqlite.md)_._
 
 [**`sqliterg`**](http://github.com/proofrock/sqliterg) is a server-side application that, applied to one or more SQLite files, allows to perform SQL queries and statements on them via REST (or better, JSON over HTTP).
 

@@ -2,7 +2,11 @@
 
 Running `sqliterg` can be done via the commandline, and it's possible to specify its behaviour via commandline parameters.
 
-### Databases, `id` and Config (Companion) Files
+## File-based and in-memory
+
+The first thing to say is that `sqliterg` supports multiple databases, both on filesystem and in-memory. We'll see shortly how to configure them.
+
+## Databases, `id` and Config (Companion) Files
 
 `sqliterg` behavior when serving databases is configured with a mix of commandline parameters and naming conventions. You specify directly on the commandline the databases to serve, either specifying the path of the file (for file-based databases) or the id of the in-memory database.
 

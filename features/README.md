@@ -5,7 +5,7 @@
 * [Can be built](../building-and-testing.md#types-of-binaries) against the system's SQLite or embedding one;
 * HTTP/JSON access, with [**client libraries**](../integrations/client-libraries.md) for convenience;
 * Directly call `sqliterg` on a database (as above), many options available using a YAML companion file;
-* [**In-memory DBs**](https://germ.gitbook.io/sqliterg/documentation/configuration-file#path) are supported;
+* [**In-memory DBs**](../documentation/running.md#databases-id-and-config-companion-files) are supported;
 * Serving of [**multiple databases**](https://germ.gitbook.io/sqliterg/documentation/configuration-file) in the same server instance;
 * [**Batching**](https://germ.gitbook.io/sqliterg/documentation/requests#batch-parameter-values-for-a-statement) of multiple value sets for a single statement;
 * All queries of a call are executed in a [**transaction**](https://germ.gitbook.io/sqliterg/documentation/requests);
