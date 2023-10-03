@@ -57,7 +57,7 @@ To cross-build, for Linux use `make docker-zbuild-linux` ; it requires Docker an
 
 ### Testing
 
-The code includes unit tests (written in Rust). Use the appropriate target for make:
+The code includes unit tests (written in Go). Use the appropriate target for make:
 
 ```bash
 make test
