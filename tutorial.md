@@ -10,28 +10,31 @@ If `sqliterg` offers a relevant capability that doesn't fit in a tutorial, it wi
 
 Let's start!
 
-### 🔧 Installation
+## Installation
 
 The installation is simple, as `sqliterg` "is" just an executable file. [Download](https://github.com/proofrock/sqliterg/releases) or [build](building-and-testing.md) it (matching your OS and architecture), and put it somewhere on the filesystem.
 
-### 🚀 First Run & Configuration
+## First Run & Configuration
 
 Let's now start the application:
 
+{% code lineNumbers="true" %}
 ```bash
 sqliterg --db testDb.db
 ```
+{% endcode %}
 
-This tells `sqliterg` to serve a database, to be created because a file at the specified path doesn't exist, using default settings. It's now possible to access the database using its id, that is the filename minus the suffix if present (in this case, `testDb`).
+This tells `sqliterg` to serve a database using default settings. The database file does not exist, so it will be created. It's now possible to access the database using its id, that is the filename minus the suffix - if present (in this case, `testDb`).
 
 {% hint style="success" %}
-More than one database can be served from the same instance, and it's possible to create [in-memory databases](documentation/running.md#mem-db). Of course more options are possible: provide [authentication](documentation/authentication.md), open the file as [read only](documentation/configuration-file.md), [specify some queries/statements](documentation/stored-statements.md) on the server that can be referenced in requests, provide [initialization statements](documentation/configuration-file.md#initstatements) to apply when creating a database, and several more.&#x20;
+More than one database can be served from the same instance, and it's possible to create [in-memory databases](documentation/running.md#mem-db). Of course more options are possible: provide [authentication](documentation/the-web-services/authentication.md), open the file as [read only](documentation/configuration-file/), [specify some queries/statements](documentation/configuration-file/stored-statements.md) on the server that can be referenced in requests, provide [initialization statements](documentation/configuration-file/#initstatements) to apply when creating a database, and several more.
 
-All this is done by creating a [companion YAML file](documentation/configuration-file.md) at the same path, called like the database but with a `.yaml` extension: `testDb.yaml` in our example.
+All this is done by creating a [companion YAML file](documentation/configuration-file/) at the same path, called like the database but with a `.yaml` extension: `testDb.yaml` in our example.
 {% endhint %}
 
 When the app starts, something like this will be printed; it gives information about what is now being served, and how.
 
+{% code lineNumbers="true" %}
 ```
 sqliterg vX.Y.Z. based on SQLite v3.41.2
 
@@ -42,14 +45,15 @@ sqliterg vX.Y.Z. based on SQLite v3.41.2
   - journal mode: WAL
 - Listening on 0.0.0.0:12321
 ```
+{% endcode %}
 
-The service is now active and serving requests. Use `Ctrl-c` to exit, as usual.
+The service is now active and serving requests. Use `Ctrl-c` to exit from it, as usual.
 
 {% hint style="success" %}
 From the commandline, it's also possible to specify the [port](documentation/running.md#port) and the [host](documentation/running.md#bind-host) to bind to.
 {% endhint %}
 
-### 🔍 First Request
+## First Request
 
 Let's now do something useful. Use a tool like [`postman`](https://www.postman.com) to submit a POST call to `http://localhost:12321/testDb`, with the following body:
 
@@ -96,7 +100,7 @@ You did it! 🚀 Going through the response:
 * **Line 4**: specifies that the statement completed with success;
 * **Line 5**: there were no updated rows (as reported by SQLite; this is a DDL command).
 
-### 🤹 Multiple Requests
+## Multiple Requests
 
 Let's say you want to run multiple SQLs in the same request. As you may suspect, this is just a matter of adding another item to the `transaction` array.
 
@@ -140,7 +144,7 @@ The response now has 2 elements in the array:
 
 Please notice **Line 9**: `rowsUpdated` is 1, signaling that we affected one row with the `INSERT`.
 
-### 🧯 Managing Errors
+## Managing Errors
 
 Let's send over the last request again (don't remove the file!). The table already exists, so the response will now fail with `500 Internal Server Error` , and with a body of:
 
@@ -195,7 +199,7 @@ The following result is produced, signaling that the first statement failed; the
 ```
 {% endcode %}
 
-### 🎂 Queries With a Result (Set)
+## Queries With a Result (Set)
 
 Up to now, we tested only statements, that don't return results other than the number of affected rows. Let's see how to run a _query_.
 
@@ -246,7 +250,7 @@ Request:
 
 * **Lines 7-8**: we now have an array with two results, containing objects. Each object has several fields, with the key being the name of the database field and the value being... the value. The key/field name is as reported by the database, so it works well when `*` is specified in a `SELECT`.
 
-### ♟️ Using Parameters
+## Using Parameters
 
 The last capability we'll cover is using parameters, either in a statement (e.g. an `INSERT`) or in a query. They are specified using named placeholders, like the following.
 
@@ -276,7 +280,7 @@ Using placeholders may seem more verbose than specifying the values in the SQL, 
 {% endhint %}
 
 {% hint style="success" %}
-For statements, it is also possible to specify multiple sets of values ('batches'); the statement will be cached and replayed for each set of the list. See `valuesBatch` in the [docs](documentation/requests.md).
+For statements, it is also possible to specify multiple sets of values ('batches'); the statement will be cached and replayed for each set of the list. See `valuesBatch` in the [docs](documentation/the-web-services/the-query-web-service/requests.md).
 {% endhint %}
 
 {% code overflow="wrap" lineNumbers="true" %}
@@ -298,17 +302,17 @@ For statements, it is also possible to specify multiple sets of values ('batches
 ```
 {% endcode %}
 
-As you can see, the response is the same, with only one result in the resultset (since the query selects by primary key).
+As you can see, the response is the same, with only one result in the result set (since the query selects by primary key).
 
-### 🕯️ Conclusions
+## Conclusions
 
 Thanks for reading so far, I hope you liked it! There are many more topics of interest, among which:
 
-* Learn to protect your transactions with [authentication](documentation/authentication.md);
+* Learn to protect your transactions with [authentication](documentation/the-web-services/authentication.md);
 * Use a [reverse proxy](integrations/reverse-proxy.md) for HTTPS and additional security;
-* Use [stored statements](documentation/stored-statements.md) to avoid passing SQL from the client;
+* Use [stored statements](documentation/configuration-file/stored-statements.md) to avoid passing SQL from the client;
 * Perform scheduled activities, e.g.: sql statements, `VACUUM`s or backups;
-* Configure [CORS](documentation/configuration-file.md#corsorigin) for more convenient access from a web page;
+* Configure [CORS](documentation/configuration-file/#corsorigin) for more convenient access from a web page;
 * ...and much more!
 
-Have a nice day!&#x20;
+Have a nice day!

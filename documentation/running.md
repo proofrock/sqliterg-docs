@@ -1,23 +1,27 @@
-# 🏃 Running
+# 🏃 Running sqliterg
 
 Running `sqliterg` can be done via the commandline, and it's possible to specify its behaviour via commandline parameters.
 
-### Databases, `id`'s and Config (Companion) Files
+### Databases, `id` and Config (Companion) Files
 
-`sqliterg` behaviour when serving databases is configured with a mix of commandline parameters and naming conventions. You specify directly on the commandline the databases to serve, either specifying the path of the file (for file-based databases) or the id of the in-memory database.&#x20;
+`sqliterg` behavior when serving databases is configured with a mix of commandline parameters and naming conventions. You specify directly on the commandline the databases to serve, either specifying the path of the file (for file-based databases) or the id of the in-memory database.
 
-`sqliterg` will look for a ["companion" configuration file](configuration-file.md) in YAML format:
+`sqliterg` will look for a ["companion" configuration file](configuration-file/) in YAML format:
 
-* for file-based databases, it can either be specified manually (after the file name and a double colon `::`) or `sqliterg` will look for it as a file that have the same base name of the database filename, but with `.yaml` extension.
-* for in-memory databases, it can be specified manually (after the database id and a double colon `::`)
+* for file-based databases, it can either:
+  * be specified manually, after the file name and a double colon `::`&#x20;
+  * or inferred from the file name, as a file that have the same base name of the database, but with `.yaml` extension.
+* for in-memory databases, it can be specified manually after the database id and a double colon `::`
 
-When present, it is used to load the serving parameters for that database. If the companion file is not present, default values will be used.
+The companion file is used to load the serving parameters for that database. If it is not present or specified, default values will be used.
 
 For example, if you run `sqliterg` as such:
 
+{% code lineNumbers="true" %}
 ```bash
 sqliterg --db ~/file1.db --mem-db mem1::~/mem1.yaml --mem-db mem2
 ```
+{% endcode %}
 
 It will:
 
@@ -27,10 +31,11 @@ It will:
 * load its configuration from `~/mem1.yaml`;
 * serve a db from memory, with an id of `mem2`, and default configuration.
 
-### Commandline Parameters
+## Commandline Parameters
 
 This is a complete commandline for `sqliterg`:
 
+{% code lineNumbers="true" %}
 ```bash
 sqliterg \
   --bind-host 0.0.0.0 \
@@ -40,6 +45,7 @@ sqliterg \
   --serve-dir myDir/
   --index-file index.html
 ```
+{% endcode %}
 
 Of course, the usual `--help` and `--version` are supported. Let's discuss the other commandline parameters one by one.
 
@@ -55,7 +61,7 @@ Port to use for incoming network communication. Defaults to `12321`.
 
 Can be repeated.
 
-Specifies one or more file paths to load and serve as SQLite db's. It will use the base name (without the `.db` suffix) as the id of the database, to use in the URL of the [request](requests.md) , and will look for a configuration/companion file in the same path, named `<id>.yaml`.
+Specifies one or more file paths to load and serve as SQLite db's. It will use the base name (without the `.db` suffix) as the id of the database, to use in the URL of the [request](the-web-services/the-query-web-service/requests.md) , and will look for a configuration/companion file in the same path, named `<id>.yaml`.
 
 It is also possible to specify a companion file at a different path, by specifying it after a double colon (`::`). Example: `--db myFile.db::/another/path/myFileConfig.yaml`.
 
@@ -71,14 +77,15 @@ Specifies a directory to serve via the internal web server. See the [relevant do
 
 #### `--index-file`
 
-When serving static assets (see [above](running.md#serve-dir)) and no file is specified in the URL, redirects to a specific index file.&#x20;
+When serving static assets (see [above](running.md#serve-dir)) and no file is specified in the URL, redirects to a specific index file.
 
 Meaningful only if `--serve-dir` is specified.
 
-### Output
+## Output
 
-`sqliterg` will parse the commandline and the (possible) [config files](configuration-file.md), will attempt to open and connect to the various databases, creating their respective files as needed. Then it will output a summary of all the configurations, like this:
+`sqliterg` will parse the commandline and the (possible) [config files](configuration-file/), it will attempt to open and connect to the various databases, creating their respective files as needed. Then it will output a summary of all the configurations, like this:
 
+{% code lineNumbers="true" %}
 ```
 sqliterg vX.Y.Z. based on SQLite v3.41.2
 
@@ -96,3 +103,4 @@ sqliterg vX.Y.Z. based on SQLite v3.41.2
   - with index file: index.html
 - Listening on 0.0.0.0:12321
 ```
+{% endcode %}

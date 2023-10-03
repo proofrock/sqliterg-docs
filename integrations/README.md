@@ -1,2 +1,2 @@
-# 🪐 Integration
+# 🍨 Integrations
 

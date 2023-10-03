@@ -1,11 +1,9 @@
 # 🎞 Features
 
-
-
 * Aligned to [**SQLite 3.41.2**](https://sqlite.org/releaselog/3\_41\_2.html);
 * A [**single executable file**](https://germ.gitbook.io/sqliterg/documentation/installation) (written in Rust);
 * [Can be built](../building-and-testing.md#types-of-binaries) against the system's SQLite or embedding one;
-* HTTP/JSON access, with [**client libraries**](https://germ.gitbook.io/sqliterg/client-libraries) for convenience;
+* HTTP/JSON access, with [**client libraries**](../integrations/client-libraries.md) for convenience;
 * Directly call `sqliterg` on a database (as above), many options available using a YAML companion file;
 * [**In-memory DBs**](https://germ.gitbook.io/sqliterg/documentation/configuration-file#path) are supported;
 * Serving of [**multiple databases**](https://germ.gitbook.io/sqliterg/documentation/configuration-file) in the same server instance;
@@ -16,15 +14,14 @@
 * "[**Macros**](https://germ.gitbook.io/sqliterg/documentation/macros)": lists of statements that can be executed at db creation, at startup, periodically or calling a web service;
 * [**Backups**](https://germ.gitbook.io/sqliterg/documentation/backups), rotated and also runnable at db creation, at startup, periodically or calling a web service;
 * [**CORS**](https://germ.gitbook.io/sqliterg/documentation/configuration-file#corsorigin) mode, configurable per-db;
-* [**Scheduled tasks**](https://germ.gitbook.io/sqliterg/documentation/sched\_tasks) (VACUUM, sql or backups), also configurable per-db;
 * [**Journal Mode**](https://sqlite.org/wal.html) (e.g. WAL) can be configured;
 * [**Embedded web server**](../documentation/web-server.md) to directly serve web pages that can access `sqliterg` without CORS;
-* [Quite fast](https://github.com/proofrock/sqliterg/blob/main/features/performances.md)!
-* Comprehensive test suite (`make test`);
+* [**Quite fast**](performances.md)!
+* Comprehensive [**test suite**](../building-and-testing.md#testing);
 * [**Docker images**](https://germ.gitbook.io/sqliterg/documentation/installation/docker), for x86\_64 and arm64;
 * Binaries are provided with a bundled SQLite "inside" them, or linked against the system's installed SQLite.
 
-### Security Features
+## Security Features
 
 * [**Authentication**](../security.md#authentication) can be configured
   * on the client, either using HTTP Basic Authentication or specifying the credentials in the request;
@@ -35,8 +32,7 @@
 * [**CORS Allowed Origin**](../security.md#cors-allowed-origin) can be configured and enforced;
 * It's possible to [**bind**](../security.md#binding-to-a-network-interface) to a network interface, to limit access.
 
-Some design choices:
+## Design choices
 
 * Very thin layer over SQLite. Errors and type translation, for example, are those provided by the SQLite driver;
-* Doesn't include HTTPS, as this can be done easily (and much more securely) with a [reverse proxy](../security.md#use-a-reverse-proxy-if-going-on-the-internet);
-* Doesn't support SQLite extensions, to improve portability.
+* Doesn't include HTTPS, as this can be done easily (and much more securely) with a [reverse proxy](../security.md#use-a-reverse-proxy-if-going-on-the-internet).

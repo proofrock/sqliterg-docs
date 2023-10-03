@@ -1,7 +1,8 @@
-# 🔦 Cheat Sheet
+# 🔦 Cheat Sheets
 
 ## Commandline
 
+{% code lineNumbers="true" %}
 ```bash
 sqliterg 
     --bind-host 0.0.0.0 \         # Optional
@@ -13,11 +14,13 @@ sqliterg
     --index-file                  # The file to use as index (starting point)
                                   #  when serving a static directory
 ```
+{% endcode %}
 
 ## Configuration file
 
 This is taken from `db_conf.template.yaml` in the repository.
 
+{% code lineNumbers="true" %}
 ```yaml
 # Main endpoint for requests is http://<host>:<port>/<db_name>
 
@@ -109,25 +112,31 @@ backup:
       authToken: ciao
       hashedAuthToken: b133a0c0e9bee3be20163d2ad31d6248db292aa6dcb1ee087a2aa50e0fc75ae2
 ```
+{% endcode %}
 
 ## Request
 
 ### URL
 
-```
+{% code lineNumbers="true" %}
+```url
 http://localhost:12321/<dbId>
 ```
+{% endcode %}
 
 ### Headers
 
-```
+{% code lineNumbers="true" %}
+```http
 Content-Type: application/json
 // If auth.mode == HTTP_BASIC, the header for basic authentication:
 Authorization: Basic bXlVc2VyMTpjaWFv
 ```
+{% endcode %}
 
 ### Body
 
+{% code lineNumbers="true" %}
 ```json
 {
     "credentials": { // Necessary if and only if auth.mode == INLINE
@@ -160,20 +169,24 @@ Authorization: Basic bXlVc2VyMTpjaWFv
     ]
 }
 ```
+{% endcode %}
 
 ## Response
 
 ### General Error (`400`, `401`, `404`, `409`, `500`)
 
+{% code lineNumbers="true" %}
 ```json
 {
     "reqIdx": 1, // 0-based index of the failed subrequest; -1 for general
     "message": "near \"SELECTS\": syntax error"
 }
 ```
+{% endcode %}
 
 ### Success (`200`)
 
+{% code lineNumbers="true" %}
 ```json
 {
     "results": [
@@ -205,3 +218,4 @@ Authorization: Basic bXlVc2VyMTpjaWFv
     ]
 }
 ```
+{% endcode %}

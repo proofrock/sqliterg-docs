@@ -11,7 +11,7 @@ The reasons are several:
 
 With clients, `sqliterg` acts as a remote protocol for SQLite.
 
-#### Platforms
+## Platforms
 
 {% hint style="info" %}
 Currently, the client libraries are the same as ws4sqlite, the request/response schema being the same. The one difference is that you cannot use the encryption feature, that was removed.

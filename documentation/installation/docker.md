@@ -11,7 +11,7 @@ Here are the relevant configurations:
 | User to run as | `--user <user_id>[:<group_id>]` | Docker standard switch; _**do use it**_ |
 | Timezone       | `-e TZ=xxx/yyy`                 | Docker standard env var                 |
 
-#### Example
+## Example
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```bash
@@ -37,11 +37,11 @@ This command will install and run `sqliterg`, configuring it to:
 
 The rest of the lines in this example are standard Docker.
 
-#### Important
+{% hint style="danger" %}
+The flag `--user` should be always specified, otherwise `sqliterg` _will start with root privileges_! You don't want this, as it creates files; for example, backups may potentially overwrite some file or wreak havoc in unpredictable ways (which are actually very predictable, but only after they happen).
+{% endhint %}
 
-* It's important to use `--user`, otherwise `sqliterg` will start with root privileges! You don't want this, as it creates files; for example, backups may potentially overwrite some file or wreak havoc in unpredictable ways (which are actually very predictable, but only after they happen).
-
-#### Caveats
+## Caveats
 
 * You have to reference database and companion files that are in the directory mapped to `/data` as they were in `/data`;
 * The path for the database file should be absolute, i.e. `/data/...`.

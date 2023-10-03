@@ -1,17 +1,20 @@
 # ❓ Requests
 
-A request is a JSON structure that is passed via a POST HTTP call to `sqliterg`, using the port specified when [running](running.md#port) the server application.
+A request is a JSON structure that is passed via a POST HTTP call to `sqliterg`, using the port specified when [running](../../running.md#port) the server application.
 
 First and foremost, the database we connect to is specified in the URL of the POST call. It is something like this:
 
+{% code lineNumbers="true" %}
 ```bash
 http://localhost:12321/db2
 ```
+{% endcode %}
 
-That `db2` part is the database ID, and must match the `id` of a database, defined in the [commandline](running.md#databases-and-config-companion-files).
+That `db2` part is the database ID, and must match the `id` of a database, defined in the [commandline](../../running.md#databases-and-config-companion-files).
 
 This is a JSON that exemplifies all possible elements of a request.
 
+{% code lineNumbers="true" %}
 ```json
 {
     "credentials": {
@@ -44,6 +47,7 @@ This is a JSON that exemplifies all possible elements of a request.
     ]
 }
 ```
+{% endcode %}
 
 Let's go through it.
 
@@ -51,13 +55,15 @@ Let's go through it.
 
 _Lines 2-5; object_
 
-If [authentication](authentication.md) is enabled _in `INLINE` mode_, this object describes the credentials. See the [detailed docs](authentication.md#credentials-in-the-request-inline-mode).
+If [authentication](../authentication.md) is enabled _in `INLINE` mode_, this object describes the credentials.
+
+See the [detailed docs](../authentication.md#credentials-in-the-request-inline-mode).
 
 #### List of Queries/Statements
 
-_Line 6; list of objects; mandatory_
+_Lines 6-29; list of objects; mandatory_
 
-**Must be not empty**. The list of the queries or statements that will actually be performed on the database, with their own parameters.
+The list of the queries or statements that will actually be performed on the database, with their own parameters.
 
 They will be run in a transaction, and the transaction will be committed only if all the queries that are _not_ marked as `noFail` (see the [relevant section](errors.md)) do successfully complete.
 
@@ -77,7 +83,7 @@ _Line 23; string; mandatory as the above_
 
 A `query` or a `statement` (see above) can consist of a reference to a Stored Query. They are prepended by a `^`. An error will occour if the S.Q. with an ID equal to the part after the `^` was not defined for this database.
 
-See the [relevant section](stored-statements.md).
+See the [relevant section](../../configuration-file/stored-statements.md).
 
 #### Parameter Values for the Query/Statement
 
@@ -95,7 +101,11 @@ _Lines 24..27; list of objects_
 
 Only for `statement`s, more than one set of parameter values can be specified; the statement will be applied to them in a batch (by _preparing_ the statement).
 
-#### NoFail: don't Fail when Errors Occour
+{% hint style="warning" %}
+It's not possible to specify both `values` and `valuesBatch`.
+{% endhint %}
+
+#### `noFail`: don't Fail when Errors Occour
 
 _Line 18; Boolean_
 
