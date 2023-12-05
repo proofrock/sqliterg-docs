@@ -43,7 +43,11 @@ This is a JSON that exemplifies all possible elements of a request.
                 { "id": 2, "val": "b" },
                 { "id": 3, "val": "c" }
             ]
-        }
+        },
+        {
+            "statement": "INSERT INTO TEMP (ID, VAL) VALUES (?, ?)",
+            "values": { 4, "d" }
+        },
     ]
 }
 ```
@@ -87,7 +91,7 @@ A `query` or a `statement` (see above) can consist of a reference to a Stored Qu
 
 See the [relevant section](../../configuration-file/stored-statements.md).
 
-#### Parameter Values for the Query/Statement
+#### (Named) Parameter Values for the Query/Statement
 
 _Lines 12, 20; object_
 
@@ -96,6 +100,12 @@ If the query needs to be parametrized, named parameters can be defined in the st
 {% hint style="warning" %}
 What happens if some parameter values aren't defined in the `values` object? If there are _less_ parameter values than expected, it will give an error. If they are correct in number, but some parameter names don't match, the missing parameters will be assigned a value of `null`.
 {% endhint %}
+
+#### (Positional) Parameter Values for the Query/Statement
+
+_Lines 31; array_
+
+Parameters can also be _positional_, i.e. specified in order. In this case the placeholder is a simple `?` and the values are given as an array.
 
 #### Batch Parameter Values for a Statement
 

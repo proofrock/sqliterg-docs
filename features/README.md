@@ -1,12 +1,13 @@
 # 🎞 Features
 
-* Aligned to [**SQLite 3.41.2**](https://sqlite.org/releaselog/3\_41\_2.html);
+* Aligned to [**SQLite 3.44.0**](https://sqlite.org/releaselog/3\_44\_0.html) for bundled builds;
 * A [**single executable file**](https://germ.gitbook.io/sqliterg/documentation/installation) (written in Rust);
 * [Can be built](../building-and-testing.md#types-of-binaries) against the system's SQLite or embedding one;
 * HTTP/JSON access, with [**client libraries**](../integrations/client-libraries.md) for convenience;
 * Directly call `sqliterg` on a database (as above), many options available using a YAML companion file;
 * [**In-memory DBs**](../documentation/running.md#file-based-and-in-memory) are supported;
 * Serving of [**multiple databases**](https://germ.gitbook.io/sqliterg/documentation/configuration-file) in the same server instance;
+* Named or positional parameters in SQL are supported;
 * [**Batching**](https://germ.gitbook.io/sqliterg/documentation/requests#batch-parameter-values-for-a-statement) of multiple value sets for a single statement;
 * All queries of a call are executed in a [**transaction**](https://germ.gitbook.io/sqliterg/documentation/requests);
 * For each query/statement, specify if a failure should rollback the whole transaction, or the failure is [**limited**](https://germ.gitbook.io/sqliterg/documentation/errors#managed-errors) to that query;

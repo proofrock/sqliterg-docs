@@ -30,6 +30,10 @@ If you followed all of the chapters until now, in particular if you used[ the co
         {
             "success": true,
             "rowsUpdatedBatch": [ 1, 1 ]
+        },
+        {
+            "success": true,
+            "rowsUpdated": 1
         }
     ]
 }
